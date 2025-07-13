@@ -1,0 +1,44 @@
+[
+  {
+    "color": "#FFFFFF",
+    "tile": {
+      "BackIndex": 0,
+      "BackImage": 1,
+      "MiddleIndex": 0,
+      "MiddleImage": 0,
+      "FrontIndex": 0,
+      "FrontImage": 0,
+      "DoorIndex": 0,
+      "DoorOffset": 0,
+      "FrontAnimationFrame": 0,
+      "FrontAnimationTick": 0,
+      "MiddleAnimationFrame": 0,
+      "MiddleAnimationTick": 0,
+      "TileAnimationImage": 0,
+      "TileAnimationOffset": 0,
+      "TileAnimationFrames": 0,
+      "Light": 0
+    }
+  },
+  {
+    "color": "#000000",
+    "tile": {
+        "BackIndex": -1,
+        "BackImage": -1,
+        "MiddleIndex": -1,
+        "MiddleImage": -1,
+        "FrontIndex": -1,
+        "FrontImage": -1,
+        "DoorIndex": 0,
+        "DoorOffset": 0,
+        "FrontAnimationFrame": 0,
+        "FrontAnimationTick": 0,
+        "MiddleAnimationFrame": 0,
+        "MiddleAnimationTick": 0,
+        "TileAnimationImage": 0,
+        "TileAnimationOffset": 0,
+        "TileAnimationFrames": 0,
+        "Light": 3
+    }
+  }
+]
