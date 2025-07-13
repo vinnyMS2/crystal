@@ -1,3 +1,6 @@
+// THIS CODE HAS NOT BEEN COMPILED OR TESTED
+// The environment does not have a C# compiler available.
+
 using System;
 using System.IO;
 using System.Drawing;
@@ -45,8 +48,9 @@ namespace MapConverter
 
         static CellInfo[,] ConvertPngToCellInfo(string inputFile, string colorMapFile)
         {
-            // For now, we'll use a hardcoded color map.
-            // In the future, we can load this from the colorMapFile.
+            // TODO: Load the color map from the colorMapFile (e.g., a JSON file).
+            // The color map should be a dictionary where the key is the color
+            // and the value is a CellInfo object.
             var colorMap = new System.Collections.Generic.Dictionary<Color, CellInfo>
             {
                 { Color.FromArgb(255, 0, 0, 0), new CellInfo { BackIndex = 0, BackImage = 1 } }, // Black
@@ -78,6 +82,13 @@ namespace MapConverter
 
         static void SaveMap(CellInfo[,] mapCells, int width, int height, string outputFile)
         {
+            // This method saves the map data to a file in the custom format.
+            // The format is as follows:
+            // 1. A 2-byte version number (short).
+            // 2. A 2-byte character tag ('C', '#').
+            // 3. A 2-byte integer for the map width (short).
+            // 4. A 2-byte integer for the map height (short).
+            // 5. The cell data, which is a sequence of CellInfo objects.
             using (var fileStream = new FileStream(outputFile, FileMode.Create))
             using (var binaryWriter = new BinaryWriter(fileStream))
             {
