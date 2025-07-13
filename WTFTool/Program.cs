@@ -36,36 +36,31 @@ namespace WTFTool
                     {
                         Rgba32 pixelColor = image[x, y];
                         string hexColor = "#" + pixelColor.R.ToString("X2") + pixelColor.G.ToString("X2") + pixelColor.B.ToString("X2");
+                        Console.WriteLine($"Debug: Pixel({x},{y}) = {hexColor}");
 
                         ColorMapping mapping = mappings.Find(m => m.Color.Equals(hexColor, StringComparison.OrdinalIgnoreCase));
 
+                        var cellInfo = new CellInfo();
                         if (mapping != null)
                         {
-                            map.Cells[x, y] = new CellInfo
-                            {
-                                BackIndex = mapping.Tile.BackIndex,
-                                BackImage = mapping.Tile.BackImage,
-                                MiddleIndex = mapping.Tile.MiddleIndex,
-                                MiddleImage = mapping.Tile.MiddleImage,
-                                FrontIndex = mapping.Tile.FrontIndex,
-                                FrontImage = mapping.Tile.FrontImage,
-                                DoorIndex = mapping.Tile.DoorIndex,
-                                DoorOffset = mapping.Tile.DoorOffset,
-                                FrontAnimationFrame = mapping.Tile.FrontAnimationFrame,
-                                FrontAnimationTick = mapping.Tile.FrontAnimationTick,
-                                MiddleAnimationFrame = mapping.Tile.MiddleAnimationFrame,
-                                MiddleAnimationTick = mapping.Tile.MiddleAnimationTick,
-                                TileAnimationImage = mapping.Tile.TileAnimationImage,
-                                TileAnimationOffset = mapping.Tile.TileAnimationOffset,
-                                TileAnimationFrames = mapping.Tile.TileAnimationFrames,
-                                Light = mapping.Tile.Light
-                            };
+                            cellInfo.BackIndex = mapping.Tile.BackIndex;
+                            cellInfo.BackImage = mapping.Tile.BackImage;
+                            cellInfo.MiddleIndex = mapping.Tile.MiddleIndex;
+                            cellInfo.MiddleImage = mapping.Tile.MiddleImage;
+                            cellInfo.FrontIndex = mapping.Tile.FrontIndex;
+                            cellInfo.FrontImage = mapping.Tile.FrontImage;
+                            cellInfo.DoorIndex = mapping.Tile.DoorIndex;
+                            cellInfo.DoorOffset = mapping.Tile.DoorOffset;
+                            cellInfo.FrontAnimationFrame = mapping.Tile.FrontAnimationFrame;
+                            cellInfo.FrontAnimationTick = mapping.Tile.FrontAnimationTick;
+                            cellInfo.MiddleAnimationFrame = mapping.Tile.MiddleAnimationFrame;
+                            cellInfo.MiddleAnimationTick = mapping.Tile.MiddleAnimationTick;
+                            cellInfo.TileAnimationImage = mapping.Tile.TileAnimationImage;
+                            cellInfo.TileAnimationOffset = mapping.Tile.TileAnimationOffset;
+                            cellInfo.TileAnimationFrames = mapping.Tile.TileAnimationFrames;
+                            cellInfo.Light = mapping.Tile.Light;
                         }
-                        else
-                        {
-                            // Default tile if no mapping is found
-                            map.Cells[x, y] = new CellInfo();
-                        }
+                        map.Cells[x, y] = cellInfo;
                     }
                 }
 
