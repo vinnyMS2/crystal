@@ -627,6 +627,22 @@
             toolStripButton1.ToolTipText = "(Ctrl-X) Save Map Or \r\nSelection As Object.X";
             toolStripButton1.Click += menu_SaveObject_Click;
             // 
+            // btnImport
+            //
+            this.btnImport = new System.Windows.Forms.ToolStripButton();
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(23, 23);
+            this.btnImport.Text = "Import";
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            //
+            // btnImport
+            //
+            this.btnImport = new System.Windows.Forms.ToolStripButton();
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(23, 23);
+            this.btnImport.Text = "Import";
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            //
             // tabControl1
             // 
             tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;

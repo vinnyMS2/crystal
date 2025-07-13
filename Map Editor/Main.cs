@@ -303,6 +303,11 @@ namespace Map_Editor
             {
                 g.DrawImage(Image.FromStream(file), new Point(0, 0));
             }
+
+            ToolStripButton btnImport = new ToolStripButton();
+            btnImport.Text = "Import";
+            btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            toolStrip1.Items.Add(btnImport);
         }
 
 
@@ -4816,6 +4821,74 @@ namespace Map_Editor
             createMiniMap();
         }
 
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PNG Files (*.png)|*.png";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Bitmap importedImage = new Bitmap(openFileDialog.FileName);
+                mapWidth = importedImage.Width / CellWidth;
+                mapHeight = importedImage.Height / CellHeight;
+                M2CellInfo = new CellInfo[mapWidth, mapHeight];
+                for (int x = 0; x < mapWidth; x++)
+                {
+                    for (int y = 0; y < mapHeight; y++)
+                    {
+                        M2CellInfo[x, y] = new CellInfo();
+                    }
+                }
+                mapPoint = new Point(0, 0);
+                setScrollBar();
+
+                using (Graphics g = Graphics.FromImage(importedImage))
+                {
+                    for (int x = 0; x < mapWidth; x++)
+                    {
+                        for (int y = 0; y < mapHeight; y++)
+                        {
+                            // This is a placeholder for the actual logic to convert pixel data to map tiles.
+                            // For now, it just creates an empty map of the correct size.
+                        }
+                    }
+                }
+            }
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PNG Files (*.png)|*.png";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Bitmap importedImage = new Bitmap(openFileDialog.FileName);
+                mapWidth = importedImage.Width / CellWidth;
+                mapHeight = importedImage.Height / CellHeight;
+                M2CellInfo = new CellInfo[mapWidth, mapHeight];
+                for (int x = 0; x < mapWidth; x++)
+                {
+                    for (int y = 0; y < mapHeight; y++)
+                    {
+                        M2CellInfo[x, y] = new CellInfo();
+                    }
+                }
+                mapPoint = new Point(0, 0);
+                setScrollBar();
+
+                using (Graphics g = Graphics.FromImage(importedImage))
+                {
+                    for (int x = 0; x < mapWidth; x++)
+                    {
+                        for (int y = 0; y < mapHeight; y++)
+                        {
+                            // This is a placeholder for the actual logic to convert pixel data to map tiles.
+                            // For now, it just creates an empty map of the correct size.
+                        }
+                    }
+                }
+            }
+        }
+
         private void btnFreeMemory_Click(object sender, EventArgs e)
         {
             Dispose();
@@ -5305,7 +5378,7 @@ namespace Map_Editor
         //Akaras: This should create the correct size MiniMap to use in game... just photoshop it to add caves and doorway icons if needed
         public void createMiniMap()
         {
-            Bitmap miniBitmap = new Bitmap(mapWidth * 12, mapHeight * 8, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            Bitmap miniBitmap = new Bitmap(mapWidth * CellWidth, mapHeight * CellHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
             //backimage
             for (int y = 0; y <= mapHeight - 1; y++)
@@ -5322,8 +5395,7 @@ namespace Map_Editor
                             {
                                 using (Graphics g = Graphics.FromImage(miniBitmap))
                                 {
-                                    Rectangle temprect = new Rectangle((x * 12), (y * 8), 24, 16);
-                                    g.DrawImage(mi.Image, temprect);
+                                    g.DrawImage(mi.Image, new Rectangle(x * CellWidth, y * CellHeight, mi.Width, mi.Height));
                                 }
                             }
                         }
@@ -5353,8 +5425,7 @@ namespace Map_Editor
                             {
                                 using (Graphics g = Graphics.FromImage(miniBitmap))
                                 {
-                                    Rectangle temprect = new Rectangle((x * 12), (y * 8) - (mi.Image.Height / 4) + 8, mi.Image.Width / 4, mi.Image.Height / 4);
-                                    g.DrawImage(mi.Image, temprect);
+                                    g.DrawImage(mi.Image, new Rectangle(x * CellWidth, y * CellHeight - mi.Height + CellHeight, mi.Width, mi.Height));
                                 }
                             }
                         }
@@ -5384,8 +5455,7 @@ namespace Map_Editor
                             {
                                 using (Graphics g = Graphics.FromImage(miniBitmap))
                                 {
-                                    Rectangle temprect = new Rectangle((x * 12), (y * 8) - (mi.Image.Height / 4) + 8, mi.Image.Width / 4, mi.Image.Height / 4);
-                                    g.DrawImage(mi.Image, temprect);
+                                    g.DrawImage(mi.Image, new Rectangle(x * CellWidth, y * CellHeight - mi.Height + CellHeight, mi.Width, mi.Height));
                                 }
                             }
                         }
